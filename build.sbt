@@ -34,7 +34,7 @@ libraryDependencies ++= Seq(
   "com.github.nscala-time" %% "nscala-time" % "2.32.0",
   "io.lemonlabs" %% "scala-uri" % "4.0.3",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-  "com.madgag.play-git-hub" %% "core" % "6.0",
+  "com.madgag.play-git-hub" %% "core" % "6.1-SNAPSHOT",
   "com.madgag.play-git-hub" %% "testkit" % "6.0" % Test,
   "com.madgag.scala-git" %% "scala-git-test" % "4.8" % Test,
   "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % Test
@@ -51,3 +51,7 @@ routesImport ++= Seq("com.madgag.scalagithub.model._","com.madgag.playgithub.Bin
 
 Compile/doc/sources := Seq.empty
 Compile/packageDoc/publishArtifact := false
+
+dockerBaseImage := "openjdk:11"
+
+Universal / javaOptions += "-Dpidfile.path=/dev/null"
