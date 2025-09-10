@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - mbarton/docker-build-sep-25
 
 jobs:
   test:
@@ -16,14 +17,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - uses: guardian/setup-scala@v1
-      - name: Build and Test
-        env:
-          PROUT_GITHUB_APP_CLIENT_ID: ${{ secrets.PROUT_TEST_GITHUB_APP_CLIENT_ID }}
-          PROUT_GITHUB_APP_CLIENT_SECRET: ${{ secrets.PROUT_GITHUB_APP_CLIENT_SECRET }}
-          PROUT_GITHUB_APP_PRIVATE_KEY: ${{ secrets.PROUT_TEST_GITHUB_APP_PRIVATE_KEY }}
-        run: sbt -v test
-      - name: Test Summary
-        uses: test-summary/action@v2
-        if: always()
-        with:
-          paths: "test-results/**/TEST-*.xml"
+      - name: Run CI script
+        # env:
+        #   PROUT_GITHUB_APP_CLIENT_ID: ${{ secrets.PROUT_TEST_GITHUB_APP_CLIENT_ID }}
+        #   PROUT_GITHUB_APP_CLIENT_SECRET: ${{ secrets.PROUT_GITHUB_APP_CLIENT_SECRET }}
+        #   PROUT_GITHUB_APP_PRIVATE_KEY: ${{ secrets.PROUT_TEST_GITHUB_APP_PRIVATE_KEY }}
+        run: s/ci
+      # - name: Test Summary
+      #   uses: test-summary/action@v2
+      #   if: always()
+      #   with:
+      #     paths: "test-results/**/TEST-*.xml"

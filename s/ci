@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+az acr login --name ${AZURE_REGISTRY_NAME}
+
+sbt docker:publishLocal
+
+# Push to Azure
+azure_tag="${AZURE_REGISTRY_NAME}.azurecr.io/digital-growth-charts-server:${GITHUB_SHA}"
+docker tag prout:1.0-SNAPSHOT ${azure_tag}
+docker push ${azure_tag}
+
+# Deploy to live
+az containerapp revision copy \
+    --name ${AZURE_LIVE_APP_NAME} \
+    --resource-group ${AZURE_RESOURCE_GROUP} \
+    --image ${azure_tag} \
+    --query 'properties.provisioningState'
