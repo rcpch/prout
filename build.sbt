@@ -73,3 +73,7 @@ routesImport ++= Seq("com.madgag.scalagithub.model._","com.madgag.playgithub.Bin
 
 Compile/doc/sources := Seq.empty
 Compile/packageDoc/publishArtifact := false
+
+dockerBaseImage := "openjdk:21"
+
+Universal / javaOptions += "-Dpidfile.path=/dev/null"
