@@ -8,7 +8,6 @@ on:
   push:
     branches:
       - main
-      - mbarton/docker-build-sep-25
 
 permissions:
   id-token: write
